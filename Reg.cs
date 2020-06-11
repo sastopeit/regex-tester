@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace _0506_RegEx
+namespace Sastopeit.RegexTester
 {
     class Reg
     {

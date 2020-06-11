@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 
-namespace _0506_RegEx
+namespace Sastopeit.RegexTester
 {
     public class Presets
     {

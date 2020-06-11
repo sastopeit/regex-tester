@@ -6,12 +6,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace _0506_RegEx
+namespace Sastopeit.RegexTester
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
+    
     public partial class MainWindow : Window
     {
         Presets p = new Presets();
