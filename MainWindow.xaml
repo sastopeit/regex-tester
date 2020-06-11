@@ -1,0 +1,73 @@
+﻿<Window x:Class="_0506_RegEx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_0506_RegEx"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="480" Width="1024">
+
+    <Grid>
+    
+        <Grid Margin="16">
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.ColumnSpan="3" Content="Reguläre Ausdrücke testen v0.3" FontSize="24" FontFamily="Inconsolata-g"/>
+
+            <StackPanel Grid.Row="1">
+                <Label Content="Presets" FontWeight="Bold"></Label>
+                <StackPanel Margin="4">
+                    <ComboBox x:Name="CB_Preset" SelectionChanged="CB_Preset_SelectionChanged" MouseEnter="CB_Preset_MouseEnter" />
+                    <WrapPanel>
+                        <CheckBox x:Name="CHB_PresetAutoLoad" IsChecked="True" VerticalAlignment="Center"  Checked="CHB_PresetAutoLoad_StateChanged" Unchecked="CHB_PresetAutoLoad_StateChanged" IsThreeState="false"/>
+                        <Label>Autoladen</Label>
+                    </WrapPanel>
+                    <Button x:Name="BT_PresetAutoLoad" Click="BT_PresetLoad_Click" Visibility="Collapsed">Preset laden</Button>
+                </StackPanel>
+            </StackPanel>
+
+            
+
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <Label Content="Intention" FontWeight="Bold"></Label>
+                <TextBox x:Name="TBX_Intention" FontSize="16" Margin="4" BorderBrush="LightGray" BorderThickness="1" Padding="4" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="1">
+                <Label Content="Teststring" FontWeight="Bold"></Label>
+                <TextBox x:Name="TBX_String" FontFamily="Inconsolata-g" FontSize="16" Margin="4" BorderBrush="LightGray" BorderThickness="1" Padding="4" TextWrapping="Wrap" TextChanged="TB_String_TextChanged" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Regulärer Ausdruck" FontWeight="Bold"></Label>
+                    <Label x:Name="LBL_RegEx_True" Content="TRUE" FontWeight="Bold" Foreground="Green" Visibility="Collapsed"/>
+                    <Label x:Name="LBL_RegEx_False" Content="FALSE" FontWeight="Bold" Foreground="Red" Visibility="Collapsed"/>
+                </StackPanel>
+                <TextBox x:Name="TBX_RegEx" FontFamily="Inconsolata-g" FontSize="16" Margin="4" BorderBrush="LightGray" BorderThickness="1" Padding="4" TextWrapping="Wrap" TextChanged="TB_Regex_TextChanged" PreviewTextInput="TBX_RegEx_PreviewTextInput" />
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="CBX_Autocomplete" IsChecked="True" Margin="3,6,0,0"/>
+                    <Label Content="Auto-Vervollständigung"/>
+                </StackPanel>
+                <Button x:Name="BT_Clipboard" Margin="4" Content="In Zwischenablage kopieren" Click="BT_Clipboard_Click" Visibility="Collapsed"/>
+                <Label x:Name="LBL_Nostring" Content="Kein Teststring eingegeben - Prüfung wird nicht durchgeführt" Visibility="Collapsed" />
+                <Label x:Name="LBL_Denyinfo" Foreground="Red" FontWeight="SemiBold" Visibility="Collapsed"/>
+                <Label x:Name="TBL_Suggest" Foreground="Red" FontWeight="SemiBold"/>
+            </StackPanel>
+        
+        </Grid>
+
+    </Grid>
+
+</Window>
