@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sastopeit.RegexTester.Checkers;
+using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
@@ -116,24 +117,6 @@ namespace Sastopeit.RegexTester
         {
             b = r.RegExp(TBX_String.Text, TBX_RegEx.Text);
 
-
-
-            // Exception-Handling à la Udo
-            //try
-            //{
-            //    b = r.RegExp(TBX_String.Text, TBX_RegEx.Text);
-            //}
-            //catch (Exception ex1)
-            //{
-            //    TBX_RegEx.Background = Brushes.LightPink;
-            //    LBL_RegEx_True.Visibility = BT_Clipboard.Visibility = Visibility.Collapsed;
-            //    LBL_RegEx_False.Visibility = TBL_Suggest.Visibility = Visibility.Visible;
-            //    TBL_Suggest.Content = $"\n{ex1.Message}";
-            //}
-            // ---
-
-
-
             if (b)
             {
                 TBX_RegEx.Background = Brushes.PaleGreen;
@@ -198,17 +181,14 @@ namespace Sastopeit.RegexTester
             int cursor = TBX_RegEx.CaretIndex;
 
             // RegEx-Syntaxfehler schon bei der Eingabe unterbinden, anschließend ggf. Autocomplete
-            if (e.Text == "{")
+
+            // Quantifizierer
+            if (e.Text == "{" | e.Text == "+" | e.Text == "?" | e.Text == "*")
             {
                 e.Handled = true;
-                if (TBX_RegEx.Text.Substring(0, cursor).EndsWith('}')
-                    | TBX_RegEx.Text.Substring(cursor).StartsWith('{')
-                    | TBX_RegEx.Text.Substring(0, cursor).EndsWith('+')
-                    | TBX_RegEx.Text.Substring(cursor).StartsWith('+')
-                    | TBX_RegEx.Text.Substring(0, cursor).EndsWith('?')
-                    | TBX_RegEx.Text.Substring(cursor).StartsWith('?')
-                    | TBX_RegEx.Text.Substring(0, cursor).EndsWith('*')
-                    | TBX_RegEx.Text.Substring(cursor).StartsWith('*'))
+
+                // (new foobar()).Methode() = Kurzform für Objekterstellung, wenn Methode nur einmal gebraucht wird
+                if ((new QuantifierCheckerList()).Check(cursor, TBX_RegEx.Text) == false)
                 {
                     LBL_Denyinfo.Visibility = Visibility.Visible;
                     LBL_Denyinfo.Content = "❌ Quantifizierer kann nicht auf Quantifizierer folgen";
@@ -221,11 +201,12 @@ namespace Sastopeit.RegexTester
                 }
             }
 
+            // Zeichenauswahl
             if (e.Text == "[" && CBX_Autocomplete.IsChecked == true)
             {
                 e.Handled = true;
-                TBX_RegEx.Text = TBX_RegEx.Text.Insert(cursor, "[A-zäöüß]");
-                TBX_RegEx.Select(cursor + 1, 7);
+                TBX_RegEx.Text = TBX_RegEx.Text.Insert(cursor, "[A-Za-zÄÖÜäöüß]");
+                TBX_RegEx.Select(cursor + 1, 13);
             }
 
             // TODO: Weitere Fehleingaben unterbinden und/oder Autocompletes, sofern sinnvoll!
